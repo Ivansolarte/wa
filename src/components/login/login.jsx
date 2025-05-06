@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 export const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuthStore();//variables globales con Zustam
-  const { form, handleChangeText } = HandleChange({ email: "", password: "" });
+  const { form, handleChangeText } = HandleChange({ email: "admin", password: "123" });
   const onsubmit = () => {
     if (form.email == "admin" && form.password == "123") {
       sessionStorage.setItem(
