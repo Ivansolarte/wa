@@ -126,7 +126,7 @@ export const TableComponent = ({ data, openModal }) => {
                     onDoubleClick={() => openModal(dato)}
                     className={`border border-gray-300 p-1 text-end font-bold text-white  ${color}`}
                   >
-                    <p className="hover:animate-pulse focus:animate-pulse focus:text-lg">
+                    <p className="hover:animate-pulse focus:animate-pulse focus:text-lg" title="Dale doble click para editar">
                       {dato.MakeToOrder}
                     </p>
                   </td>
