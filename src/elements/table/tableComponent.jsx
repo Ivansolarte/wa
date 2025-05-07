@@ -1,12 +1,11 @@
-import {useState} from "react";
+import { useState } from "react";
 import { ModalCell } from "../../components/home/modalCell";
 
 export const TableComponent = ({ data, openModal }) => {
-
   //   if (!Array.isArray(data) || data.length === 0) return null;
 
-  const [stateLoading, setStateLoading] = useState(false)
-  const [dataCell, setDataCell] = useState([])
+  const [stateLoading, setStateLoading] = useState(false);
+  const [dataCell, setDataCell] = useState([]);
 
   const getColor = (value, red, yellow, green) => {
     if (value >= 1 && value <= red) return "bg-red-500"; // rojo
@@ -27,7 +26,7 @@ export const TableComponent = ({ data, openModal }) => {
   );
 
   const columnSelect = (e) => {
-    setStateLoading(true)
+    setStateLoading(true);
     var resumen = [
       { color: "bg-red-500", cantidad: 0, porcentaje: "0%" },
       { color: "bg-yellow-500", cantidad: 0, porcentaje: "0%" },
@@ -35,7 +34,7 @@ export const TableComponent = ({ data, openModal }) => {
       { color: "bg-black", cantidad: 0, porcentaje: "0%" },
       { color: "bg-blue-500", cantidad: 0, porcentaje: "0%" },
     ];
- 
+
     const fecha = new Date(e);
     const buscarfecha = fecha.toISOString().split(".")[0];
 
@@ -72,11 +71,11 @@ export const TableComponent = ({ data, openModal }) => {
     for (var k = 0; k < resumen.length; k++) {
       var cantidad = resumen[k].cantidad;
       var porcentaje = (cantidad / total) * 100;
-      resumen[k].porcentaje = porcentaje.toFixed(2) + "%"; 
+      resumen[k].porcentaje = porcentaje.toFixed(2) + "%";
     }
 
     setDataCell(resumen);
-    setStateLoading(false)
+    setStateLoading(false);
   };
 
   return (
@@ -103,10 +102,7 @@ export const TableComponent = ({ data, openModal }) => {
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr
-              key={index}
-              className="bg-white"              
-            >
+            <tr key={index} className="bg-white">
               <td className="border border-gray-300 p-1 text-center sm:sticky left-0 bg-white sm:z-30 w-[100px]">
                 {item.CenterCode}
               </td>
@@ -123,12 +119,18 @@ export const TableComponent = ({ data, openModal }) => {
                 return (
                   <td
                     key={j}
-                    onDoubleClick={() => openModal(dato)}
-                    className={`border border-gray-300 p-1 text-end font-bold text-white  ${color}`}
+                    onClick={() => openModal(dato)}
+                    className={`border border-gray-300 p-1 text-end font-bold text-white ${color}`}
                   >
-                    <p className="hover:animate-pulse focus:animate-pulse focus:text-lg" title="Dale doble click para editar">
-                      {dato.MakeToOrder}
-                    </p>
+                    <div className="group inline-block relative">
+                      <p className="hover:animate-pulse focus:animate-pulse focus:text-lg">
+                        {dato.MakeToOrder}
+                      </p>
+                      <div className="absolute border border-[3px] z-40 border-yellow-500 bottom-full right-0 mb-1 hidden w-max max-w-xs rounded bg-yellow-400 px-2 py-3 text-sm text-slate-50 group-hover:block cursor-pointer">
+                        Dale doble clic para editar el valor de "
+                        {dato.MakeToOrder}"
+                      </div>
+                    </div>
                   </td>
                 );
               })}
@@ -136,7 +138,10 @@ export const TableComponent = ({ data, openModal }) => {
           ))}
         </tbody>
       </table>
-      {dataCell.length>0&&<ModalCell data={dataCell} state={stateLoading} close={setDataCell} />}
+      {dataCell.length > 0 && (
+        
+        <ModalCell data={dataCell} state={stateLoading} close={setDataCell} />
+      )}
     </div>
   );
 };
