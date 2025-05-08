@@ -107,7 +107,7 @@ export const TableComponent = ({ data, openModal }) => {
                     className={`td-data cursor-pointer ${color}`}
                   >
                     <div className="cell-container">
-                      <p className="cell-text">{dato.MakeToOrder}</p>
+                      <p className="cell-text" title={`Click para editar el valor de "${dato.MakeToOrder}"`}>{dato.MakeToOrder}</p>
                       <div className="cell-tooltip">
                         Click para editar el valor de "{dato.MakeToOrder}"
                       </div>
