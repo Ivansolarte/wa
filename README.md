@@ -21,3 +21,13 @@ npm install
 # Ejecutar el proyecto en desarrollo
 npm run dev
 http://localhost:5173
+
+## Login
+El proyecto incluye un login básico para validar el funcionamiento del manejo de estado global con Zustand.
+Puedes iniciar sesión con las siguientes credenciales:
+
+Correo: admin
+
+Contraseña: 123
+
+Una vez autenticado, se generará un token que se usará para validar si el usuario está autenticado o no. Este token se almacena en sessionStorage, lo que permite mantener la sesión activa incluso al recargar la página. El estado de autenticación se gestiona globalmente mediante Zustand.

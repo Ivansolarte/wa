@@ -8,7 +8,7 @@ export const ModalCell = ({ data, state, close }) => {
   return (
     <Modal>
       <div className="">
-        <CardSummary arraySummary={data} stateLoading={state} />
+        <CardSummary arraySummary={data} stateLoading={state} big={true} />
         <div className="flex justify-center mb-10">
           <div className="w-1/2 ">
             <ButtonClassic title={"Cerrar"} onClick={() => close([])} />

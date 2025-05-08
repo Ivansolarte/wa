@@ -4,10 +4,10 @@
             "CenterCode": "BCV",
             "Reference": "210001000004R20",
             "VisibleForecastedDate": "2025-03-21T00:00:00",
-            "NetFlow": 1513.0,
+            "NetFlow": 2,
             "GreenZone": 121.768285,
-            "YellowZone": 121.768285,
-            "RedZone": 194.829256,
+            "YellowZone": 1,
+            "RedZone": 1,
             "MakeToOrder": 0
         },
         {

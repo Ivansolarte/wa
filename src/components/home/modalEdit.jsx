@@ -26,7 +26,7 @@ export const ModalEdit = ({ obj, update, openModal }) => {
 
   return (
     <Modal>
-      <div className="m-4 p-4">
+      <div className="m-4 p-4 w-[450px]">
         <div className="flex justify-end">
           <p
             className="text-xl w-8 h-8 text-center rounded-full border border-black"
@@ -44,7 +44,7 @@ export const ModalEdit = ({ obj, update, openModal }) => {
             <p>
             "NetFlow" = {JSON.stringify(obj.NetFlow)}
             </p>
-            <p
+            {/* <p
               className={`uppercase text-xs ${
                 1 <= obj.NetFlow + obj.MakeToOrder &&
                 obj.NetFlow + obj.MakeToOrder <= obj.RedZone
@@ -93,7 +93,7 @@ export const ModalEdit = ({ obj, update, openModal }) => {
               }`}
             >
               azul
-            </p>
+            </p> */}
           </div>
           {/* //la ayuda de colores */}
         </div>

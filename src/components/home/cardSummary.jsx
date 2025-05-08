@@ -1,7 +1,7 @@
 import React from "react";
 import { Loading } from "../modals/loading";
 
-export const CardSummary = ({ arraySummary, stateLoading }) => {
+export const CardSummary = ({ arraySummary, stateLoading, big = false }) => {
   const selectColor = {
     red: "Rojo",
     yellow: "Amarillo",
@@ -12,38 +12,47 @@ export const CardSummary = ({ arraySummary, stateLoading }) => {
   //   calculo el total de cantidad de de celdas
   const totalCant = arraySummary.reduce((acc, item) => acc + item.cantidad, 0);
   return (
-    <div className="m-10  flex justify-center">
-      <div className="border rounded-lg border-2 border-slate-600">
-        <p className=" text-center font-extrabold text-3xl my-2">
-          Resumen de los datos{" "}
-        </p>
+    <div className="summary-wrapper">
+      <div className="summary-box">
+        <p className="summary-title">{`Resumen ${big?"de la columna":"de todos los datos"}`}</p>
         {arraySummary.map((item, index) => (
-          <div key={index} className="flex p-3">
-            <p className="w-[150px]">
+          <div key={index} className="summary-row">
+            <p className="summary-color">
               Color:
               <span className="ml-2 font-bold">
                 {selectColor[item.color.split("-")[1]]}
               </span>
             </p>
-            <p className="ml-2 w-[140px]">
+            <p className="summary-cantidad">
               Cantidad:<span className="m-2">{item.cantidad}</span>
             </p>
-            <div className=" w-[100px]">
-              <div className="w-[100%] bg-gray-200 rounded-full dark:bg-gray-700 z-20">
-                <div
-                  className={`text-xs font-medium text-blue-100 text-center py-3 leading-none rounded-full z-0 ${item.color}`}
-                  //   style={{ width: `50%` }}
-                  style={{ width: `${parseFloat(item.porcentaje)}%` }}
-                ></div>
+            {!big ? (
+              <div className="summary-bar-container">
+                <div className="summary-bar-bg">
+                  <div
+                    className={`summary-bar ${item.color}`}
+                    style={{ width: `${parseFloat(item.porcentaje)}%` }}
+                  ></div>
+                </div>
               </div>
-            </div>
-            <p className="ml-2 w-[150px]">
+            ) : (
+              <div className="flex justify-start w-[250px] ">
+                {Array.from({ length: Math.min(item.cantidad, 10) }).map(() => (
+                  <div
+                    className={`h-8 w-7 border-slate-100 border ${item.color}`}
+                  ></div>
+                  
+                ))}
+                {item.cantidad >10 &&<p className="text-lg animate-pulse" title={`Cantidad es de ${item.cantidad}`}>...</p>}
+              </div>
+            )}
+            <p className="summary-porcentaje">
               Porcentaje:<span className="ml-2">{item.porcentaje}</span>
             </p>
           </div>
         ))}
-        <p className="w-[150px] m-3">
-          Total:<span className="ml-5 text-xl font-bold">{totalCant}</span>
+        <p className="summary-total">
+          Total:<span className="summary-total-value">{totalCant}</span>
         </p>
       </div>
       {stateLoading && <Loading />}

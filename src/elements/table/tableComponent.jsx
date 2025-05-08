@@ -1,20 +1,12 @@
 import { useState } from "react";
 import { ModalCell } from "../../components/home/modalCell";
+import { getColor } from "../../utils/funtions";
 
 export const TableComponent = ({ data, openModal }) => {
   //   if (!Array.isArray(data) || data.length === 0) return null;
 
   const [stateLoading, setStateLoading] = useState(false);
   const [dataCell, setDataCell] = useState([]);
-
-  const getColor = (value, red, yellow, green) => {
-    if (value >= 1 && value <= red) return "bg-red-500"; // rojo
-    if (value > red && value <= red + yellow) return "bg-yellow-500"; // amarillo
-    if (value > red + yellow && value <= red + yellow + green)
-      return "bg-green-500"; // verde
-    if (value === 0) return "bg-black"; // negro
-    if (value > red + yellow + green) return "bg-blue-500"; // azul
-  };
 
   const formatFecha = (fechaCompleta) => {
     const partes = fechaCompleta.split("T")[0].split("-");
@@ -79,20 +71,16 @@ export const TableComponent = ({ data, openModal }) => {
   };
 
   return (
-    <div className="overflow-auto mt-5 border rounded-lg shadow-2xl">
-      <table className="min-w-full border-collapse border border-gray-300 text-sm">
+    <div className="container-table">
+      <table className="table-main">
         <thead>
-          <tr className="bg-gray-200 sticky top-0 ">
-            <th className="border border-gray-300 p-1 sm:sticky left-0 bg-white sm:z-10 w-[100px]">
-              CenterCode
-            </th>
-            <th className="border border-gray-300 p-1 sm:sticky left-[84px] bg-white sm:z-10 w-[200px]">
-              Reference
-            </th>
+          <tr className="table-header-row">
+            <th className="th-center-code">CenterCode</th>
+            <th className="th-reference">Reference</th>
             {headers.map((fecha, index) => (
               <th
                 key={index}
-                className="border border-gray-300 p-1 cursor-pointer"
+                className="th-date hover:animate-ping "
                 onClick={() => columnSelect(fecha)}
               >
                 {fecha}
@@ -102,13 +90,9 @@ export const TableComponent = ({ data, openModal }) => {
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index} className="bg-white">
-              <td className="border border-gray-300 p-1 text-center sm:sticky left-0 bg-white sm:z-30 w-[100px]">
-                {item.CenterCode}
-              </td>
-              <td className="border border-gray-300 p-1 text-center sm:sticky left-[84px] bg-white sm:z-30 w-[200px]">
-                {item.Reference}
-              </td>
+            <tr key={index} className="tr-body">
+              <td className="td-center-code">{item.CenterCode}</td>
+              <td className="td-reference">{item.Reference}</td>
               {item.Data.map((dato, j) => {
                 const color = getColor(
                   dato.NetFlow + dato.MakeToOrder,
@@ -120,15 +104,12 @@ export const TableComponent = ({ data, openModal }) => {
                   <td
                     key={j}
                     onClick={() => openModal(dato)}
-                    className={`border border-gray-300 p-1 text-end font-bold text-white ${color}`}
+                    className={`td-data cursor-pointer ${color}`}
                   >
-                    <div className="group inline-block relative">
-                      <p className="hover:animate-pulse focus:animate-pulse focus:text-lg">
-                        {dato.MakeToOrder}
-                      </p>
-                      <div className="absolute border border-[3px] z-40 border-yellow-500 bottom-full right-0 mb-1 hidden w-max max-w-xs rounded bg-yellow-400 px-2 py-3 text-sm text-slate-50 group-hover:block cursor-pointer">
-                        Dale doble clic para editar el valor de "
-                        {dato.MakeToOrder}"
+                    <div className="cell-container">
+                      <p className="cell-text">{dato.MakeToOrder}</p>
+                      <div className="cell-tooltip">
+                        Click para editar el valor de "{dato.MakeToOrder}"
                       </div>
                     </div>
                   </td>
@@ -139,9 +120,9 @@ export const TableComponent = ({ data, openModal }) => {
         </tbody>
       </table>
       {dataCell.length > 0 && (
-        
         <ModalCell data={dataCell} state={stateLoading} close={setDataCell} />
       )}
     </div>
   );
+  
 };

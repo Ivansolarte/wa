@@ -22,43 +22,38 @@ export const Login = () => {
     alert("Credenciales incorrectas")
   };
   return (
-    <div className="flex h-screen flex-col justify-center px-6 py-12 lg:px-8 ">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-          Iniciar session
-        </h2>
-      </div>
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <div className="space-y-6">
-          <div>
-            <label className="block text-sm/6 font-medium text-gray-900">
-              Correo electrónico
-            </label>
-            <div className="mt-2">
-              <InputClassic
-                name={"email"}
-                value={form.email}
-                onChange={handleChangeText}
-              />
-            </div>
-          </div>
-          <div>
-            <label className="block text-sm/6 font-medium text-gray-900">
-              Contraseña
-            </label>
-            <div className="mt-2">
-              <InputClassic
-                name={"password"}
-                value={form.password}
-                onChange={handleChangeText}
-              />
-            </div>
-          </div>
-          <div>
-            <ButtonClassic title={"Enviar"} onClick={onsubmit} />
-          </div>
+    <div className="login-wrapper">
+  <div className="login-container">
+    <h2 className="login-title">Iniciar sesión</h2>
+  </div>
+  <div className="login-form">
+    <div className="login-space">
+      <div>
+        <label className="login-label">Correo electrónico</label>
+        <div className="login-input-wrapper">
+          <InputClassic
+            name={"email"}
+            value={form.email}
+            onChange={handleChangeText}
+          />
         </div>
       </div>
+      <div>
+        <label className="login-label">Contraseña</label>
+        <div className="login-input-wrapper">
+          <InputClassic
+            name={"password"}
+            value={form.password}
+            onChange={handleChangeText}
+          />
+        </div>
+      </div>
+      <div>
+        <ButtonClassic title={"Enviar"} onClick={onsubmit} />
+      </div>
     </div>
+  </div>
+</div>
+
   );
 };
