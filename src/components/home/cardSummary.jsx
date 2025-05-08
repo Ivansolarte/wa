@@ -37,8 +37,9 @@ export const CardSummary = ({ arraySummary, stateLoading, big = false }) => {
               </div>
             ) : (
               <div className="flex justify-start w-[250px] ">
-                {Array.from({ length: Math.min(item.cantidad, 10) }).map(() => (
+                {Array.from({ length: Math.min(item.cantidad, 10) }).map((index) => (
                   <div
+                  key={index}
                     className={`h-8 w-7 border-slate-100 border ${item.color}`}
                   ></div>
                   
